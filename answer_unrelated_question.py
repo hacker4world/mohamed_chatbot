@@ -17,5 +17,8 @@ def answer_unrelated_question(question):
     })
 
     return jsonify({
-        "response": response
+        "response": clean_data(response).strip()
     })
+
+def clean_data(response):
+    return response.replace("<think>", "").replace("</think>", "")

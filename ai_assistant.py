@@ -20,6 +20,8 @@ def ai_assistant(prompt):
         "prompt": prompt
     }).strip()
 
+    intent = clean_data(intent).strip()
+
     print(intent)
 
     if intent == "company_question":
@@ -34,3 +36,6 @@ def ai_assistant(prompt):
         return jsonify({
             "response": "intent was unrecognized"
         })
+
+def clean_data(response):
+    return response.replace("<think>", "").replace("</think>", "")

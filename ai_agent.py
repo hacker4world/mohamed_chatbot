@@ -30,6 +30,8 @@ def suggest_actions(prompt):
         "message": prompt
     }).strip()
 
+    detected_value = clean_data(detected_value).strip()
+
     if detected_value == "none":
         unrelated_suggestion_prompt = ChatPromptTemplate.from_template(UNSWER_UNRELATED_SUGGESTION)
 
@@ -38,7 +40,7 @@ def suggest_actions(prompt):
         response_message = chain.invoke({}).strip()
 
         return jsonify({
-            "response": response_message
+            "response": clean_data(response_message).strip()
         })
     
     else:
@@ -80,7 +82,7 @@ def suggest_actions(prompt):
             }).strip()
 
             return jsonify({
-                "response": suggestions
+                "response": clean_data(suggestions).strip()
             })
         
 
@@ -146,3 +148,5 @@ def predict_data(prompt):
 
 
     
+def clean_data(response):
+    return response.replace("<think>", "").replace("</think>", "")

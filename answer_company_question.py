@@ -26,7 +26,7 @@ def answer_company_question(question):
     })
 
     return jsonify({
-        "response": response
+        "response": clean_data(response).strip()
     })
 
 
@@ -47,3 +47,6 @@ def fetch_documents(question):
 
     return context
 
+
+def clean_data(response):
+    return response.replace("<think>", "").replace("</think>", "")
