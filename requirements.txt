@@ -7,3 +7,5 @@ langchain_text_splitters
 pinecone
 langchain_core
 openai
+langchain_community
+mysql
